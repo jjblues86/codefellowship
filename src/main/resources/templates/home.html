@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Made it pass security, welcome [[${username}]]</h1>
+
+    <h2>Make new users here</h2>
+
+    <form action="/signup" method="post">
+       Username <input type="username" name="username">
+       Password <input type="password" name="password">
+        First Name<input type="firstname" name="firstName">
+        Last Name<input type="lastname" name="lastName">
+        DOB <input type="DateOfBirth" name="dob">
+        Bio<input type="bio" name="bio">
+        <input type="submit">
+
+    </form>
+</body>
+</html>
