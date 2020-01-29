@@ -24,7 +24,7 @@ public class ApplicationUserController {
     @Autowired private PasswordEncoder passwordEncoder;
 
     @PostMapping("/signup")
-    public RedirectView createNewApplication(String username, String password, String firstName, String lastName, String bio, int dob){
+    public RedirectView createNewApplication(String username, String password, String firstName, String lastName, String bio, String dob){
 
         ApplicationUser newUser = new ApplicationUser(username, passwordEncoder.encode(password), firstName, lastName, bio, dob);
 
@@ -37,6 +37,16 @@ public class ApplicationUserController {
     public String showLoginForm(){
 
         return "login";
+    }
+
+    @GetMapping("/myProfile")
+    public String showMyProfile(Principal p, Model m){
+        ApplicationUser logedInUser = applicationUserRepository.findByUsername(p.getName());
+        m.addAttribute("loggedInUser", logedInUser);
+        m.addAttribute("principalTheAndroid", p.getName());
+
+
+        return "myProfile";
     }
 
     @GetMapping("/users/{id}")
