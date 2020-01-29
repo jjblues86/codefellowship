@@ -27,18 +27,38 @@ public class ApplicationUser implements UserDetails {
     String firstName;
     String lastName;
     String bio;
-    int dob;
+    String dob;
 
 
     public ApplicationUser(){};
 
-    public ApplicationUser(String username, String password, String firstName, String lastName, String bio, int dob){
+    public ApplicationUser(String username, String password, String firstName, String lastName, String bio, String dob){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;
         this.dob = dob;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public String getDob() {
+        return dob;
     }
 
     @Override
