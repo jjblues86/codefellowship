@@ -4,18 +4,23 @@ package com.example.jjblues86.codefellowship.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    public long id;
+
+    @OneToMany(mappedBy = "applicationUser")
+    List<CreatePost> posts;
+
+    public List<CreatePost> getPosts(){
+        return this.posts;
+    }
 
     String username;
     String password;

@@ -3,16 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 
 </head>
 <body>
+<div class="nav">
+<nav>
+    <ul>
+        <li>
+            <a href="/">Home</a>
+            <a href="/login">Login</a>
+            <a href="/logout">Log Out</a>
+
+        </li>
+    </ul>
+</nav>
+</div>
+
     <h1>Welcome to my page Please login</h1>
+<div>
 
     <form action="/login" method="post">
-        <input type="username" name="username">
-        <input type="password" name="password">
-        <input type="submit">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Your username.." required>
+        <label for="password">Password</label>
+        <input type="text" name="password" id="password" placeholder="Your password.." required>
+        <input type="submit" value="submit">
     </form>
+</div>
 </body>
 </html>

@@ -3,22 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<div class="nav">
+    <nav>
+        <ul>
+            <li>
+                <a href="/">Home</a>
+                <a href="/login">Login</a>
+                <a href="/logout">Log Out</a>
+
+            </li>
+        </ul>
+    </nav>
+</div>
     <h1>Made it pass security, welcome [[${username}]]</h1>
 
     <h2>Make new users here</h2>
 
+<div>
     <form action="/signup" method="post">
-       Username <input type="username" name="username">
-       Password <input type="password" name="password">
-        First Name<input type="firstname" name="firstName">
-        Last Name<input type="lastname" name="lastName">
-        DOB <input type="DateOfBirth" name="dob">
-        Bio<input type="bio" name="bio">
-        <input type="submit">
-
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username">
+        <label for="password">Password</label>
+        <input type="text" name="password" id="password">
+        <label for="firstname">First Name</label>
+        <input type="text" name="firstName" id="firstname">
+        <label for="lastname">Last Name</label>
+        <input type="text" name="lastName" id="lastname">
+        <label for="bio">Date of Birth</label>
+        <input type="dob" name="dob"><br>
+        <label for="bio">Bio</label>
+        <input type="text" name="bio" id="bio"/>
+        <input type="submit" value="submit">
     </form>
+</div>
 </body>
 </html>
