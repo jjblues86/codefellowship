@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="nav">
+    <nav>
+        <ul>
+            <li>
+                <a href="/">Home</a>
+                <a href="/login">Login</a>
+                <a href="/logout">Log Out</a>
+
+            </li>
+        </ul>
+    </nav>
+</div>
+
+    <h1>This is [[${usernameWeAreVisiting}]]'s detail page, you are visiting them [[${principalTheAndroid}]]</h1>
+
+    <h2>Create a profile</h2>
+        <ul>
+            <li th:each="post : ${userWeAreVisiting.posts}" th:style="'background-color:' + ${post.color}">
+                <p> [[${post.color}]] [[${post.body}]] [[${post.gender}]] [[${post.hobby}]]</p>
+            </li>
+        </ul>
+    <form action="/postDetails" method="post">
+
+        <input type="hidden" th:value="${userIdWeAreVisiting}" name="id">
+        Color <input type="color" name="color"><br>
+        Body <input type="text" name="body">
+        Gender <input type="text" name="gender">
+        Hobby <input type="text" name="hobby">
+        <input type="submit">
+    </form>
+
+    <img src="/images/bingo.jpg" alt="Dog">
+
+</body>
+</html>
