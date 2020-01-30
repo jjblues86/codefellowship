@@ -43,20 +43,39 @@ public class ApplicationUserController {
     public String showMyProfile(Principal p, Model m){
         ApplicationUser logedInUser = applicationUserRepository.findByUsername(p.getName());
         m.addAttribute("loggedInUser", logedInUser);
+        m.addAttribute("userIdWeAreVisiting", logedInUser.id);
         m.addAttribute("principalTheAndroid", p.getName());
-
 
         return "myProfile";
     }
 
     @GetMapping("/users/{id}")
     public String showUserDetails(@PathVariable long id, Principal p, Model m){
-        ApplicationUser currentUser = applicationUserRepository.findById(id).get();
-        m.addAttribute("usernameWeAreVisiting", currentUser.getUsername());
-        m.addAttribute("userIdWeAreVisiting", currentUser.id);
-        m.addAttribute("userWeAreVisiting", currentUser);
-        m.addAttribute("principalTheAndroid", p.getName());
-
+        if(p != null) {
+            ApplicationUser currentUser = applicationUserRepository.findById(id).get();
+            m.addAttribute("usernameWeAreVisiting", currentUser.getUsername());
+            m.addAttribute("userIdWeAreVisiting", currentUser.id);
+            m.addAttribute("userWeAreVisiting", currentUser);
+            m.addAttribute("principalTheAndroid", p.getName());
+        }
         return "postDetails";
+    }
+
+    @GetMapping("/users")
+    public String getAllUsers(Principal p, Model m){
+        if(p != null){
+            m.addAttribute("users", p);
+        }
+        m.addAttribute("allUsers", applicationUserRepository.findAll());
+        return "allUsers";
+    }
+
+    @GetMapping("/feed")
+    public String getAUserFeed(Principal p, Model m){
+        if(p != null){
+            m.addAttribute("users", p);
+        }
+        m.addAttribute("loggedInUser", applicationUserRepository.findByUsername(p.getName()));
+        return "feed";
     }
 }

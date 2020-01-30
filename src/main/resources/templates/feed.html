@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User's Feed</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+<h1>Feed</h1>
+<div th:each="feed : ${loggedInUser.following}"></div>
+
+</body>
+</html>

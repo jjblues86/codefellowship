@@ -19,11 +19,23 @@ public class PostController {
     PostRepository postRepository;
 
     @PostMapping("/postDetails")
-        public RedirectView createUserProfile(long id, String color, String body, String gender, String hobby, String createdAt){
+        public RedirectView createUserProfile(long id, String color, String name, String body, String gender, String hobby, String createdAt){
         ApplicationUser userProfile = applicationUserRepository.findById(id).get();
 
-        CreatePost createProfile = new CreatePost(userProfile, color, body, gender, hobby, createdAt);
+        CreatePost createProfile = new CreatePost(userProfile, color, name, body, gender, hobby, createdAt);
         postRepository.save(createProfile);
         return new RedirectView("/users/" + id);
         }
+
+    @PostMapping("post/follow")
+        public RedirectView canFollowEachOther(long id, long followerId, long followingId){
+        CreatePost follower = postRepository.findById(followerId).get();
+        CreatePost following = postRepository.findById(followingId).get();
+        follower.haveMoreFollows(following);
+        postRepository.save(follower);
+
+        return new RedirectView("/users/" + id);
+
+    }
+
 }
