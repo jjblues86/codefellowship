@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Every User</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="nav">
+    <nav>
+        <ul>
+            <li>
+                <a href="/">Home</a>
+                <a href="/login">Login</a>
+                <a href="/myProfile">My Profile</a>
+                <a href="/users/">All Users</a>
+                <a href="/logout">Log Out</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<!--<div th:each="currentuser : ${allUsers}"></div>-->
+<div th:each="currentUser : ${allUsers}">
+    <p>[[${currentUser.username}]]</p>
+</div>
+
+</body>
+</html>

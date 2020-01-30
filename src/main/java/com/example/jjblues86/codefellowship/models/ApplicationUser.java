@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -21,6 +22,27 @@ public class ApplicationUser implements UserDetails {
     public List<CreatePost> getPosts(){
         return this.posts;
     }
+
+    public Set<ApplicationUser> getUsersThatIFollow() {
+        return usersThatIFollow;
+    }
+
+    public void haveMoreFollows(ApplicationUser following){
+        this.usersThatIFollow.add(following);
+    }
+
+    public Set<ApplicationUser> getUsersThatFollowMe() {
+        return usersThatFollowMe;
+    }
+
+    @ManyToMany
+    @JoinTable(name="follow",
+            joinColumns = {@JoinColumn(name="follower")},
+            inverseJoinColumns = {@JoinColumn(name = "following")})
+    Set<ApplicationUser> usersThatIFollow;
+
+    @ManyToMany(mappedBy = "usersThatIFollow")
+    Set<ApplicationUser> usersThatFollowMe;
 
     String username;
     String password;

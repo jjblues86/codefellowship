@@ -3,6 +3,7 @@ package com.example.jjblues86.codefellowship.models;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class CreatePost {
@@ -12,20 +13,23 @@ public class CreatePost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long Id;
 
+
     @ManyToOne
     ApplicationUser applicationUser;
 
 
     String color;
+    String name;
     String body;
     String gender;
     String hobby;
     String createdAt;
 
 
-    public CreatePost(ApplicationUser applicationUser, String color, String body, String gender, String hobby,String createdAt) {
+    public CreatePost(ApplicationUser applicationUser, String color, String name, String body, String gender, String hobby,String createdAt) {
         this.applicationUser = applicationUser;
         this.color = color;
+        this.name = name;
         this.body = body;
         this.gender = gender;
         this.hobby = hobby;
@@ -37,9 +41,6 @@ public class CreatePost {
 
     public CreatePost(){}
 
-//    public CreatePost(ApplicationUser userProfile, String color, String body, String gender, String hobby) {
-//
-//    }
 
 
     public long getId() {
@@ -69,6 +70,9 @@ public class CreatePost {
         return hobby;
     }
 
+    public void haveMoreFollows(CreatePost following) {
+
+    }
 }
 
 

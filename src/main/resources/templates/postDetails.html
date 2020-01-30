@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <div class="nav">
@@ -13,6 +13,8 @@
                 <a href="/">Home</a>
                 <a href="/login">Login</a>
                 <a href="/logout">Log Out</a>
+                <a href="/users/">All Users</a>
+
 
             </li>
         </ul>
@@ -23,14 +25,46 @@
 
     <h2>Create a profile</h2>
         <ul>
-            <li th:each="post : ${userWeAreVisiting.posts}" th:style="'background-color:' + ${post.color}">
+            <li th:each="post : ${userWeAreVisiting.posts}" th:style="'background-color:' + ${post.color} + '30'">
                 <p> [[${post.color}]] [[${post.body}]] [[${post.gender}]] [[${post.hobby}]]</p>
             </li>
         </ul>
+
+    <form action="/post/follow" method="post">
+
+        <h3>Follow A User</h3>
+
+        <label for="followerId">Followers</label>
+        <select name="followerId">
+            <option th:each="post : ${userWeAreVisiting.posts}" th:value="${post.id}">
+                <p> [[${post.color}]] [[${post.body}]] [[${post.gender}]] [[${post.hobby}]]
+
+                <ul>
+                <li th:each="followers : ${userWeAreVisiting.usersThatIFollow}" th:text="${followers.color}"></li>
+            </ul>
+
+            </option>
+        </select>
+
+        <label for="followingId">Following</label>
+        <select name="followingId">
+            <option th:each="post : ${userWeAreVisiting.posts}" th:value="${post.id}">
+                <p> [[${post.color}]] [[${post.body}]] [[${post.gender}]] [[${post.hobby}]]
+                <ul>
+
+                </ul>
+            </option>
+        </select>
+        <input type="hidden" th:value="${userWeAreVisiting.id}" name="id">
+        <input type="submit">
+    </form>
+
+
     <form action="/postDetails" method="post">
 
         <input type="hidden" th:value="${userIdWeAreVisiting}" name="id">
         Color <input type="color" name="color"><br>
+        Name <input type="name" name="name">
         Body <input type="text" name="body">
         Gender <input type="text" name="gender">
         Hobby <input type="text" name="hobby">
