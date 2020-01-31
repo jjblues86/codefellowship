@@ -52,11 +52,10 @@ public class ApplicationUserController {
     @GetMapping("/users/{id}")
     public String showUserDetails(@PathVariable long id, Principal p, Model m){
         if(p != null) {
-            ApplicationUser currentUser = applicationUserRepository.findById(id).get();
-            m.addAttribute("usernameWeAreVisiting", currentUser.getUsername());
-            m.addAttribute("userIdWeAreVisiting", currentUser.id);
-            m.addAttribute("userWeAreVisiting", currentUser);
-            m.addAttribute("principalTheAndroid", p.getName());
+            ApplicationUser userWeAreVisiting = applicationUserRepository.findById(id).get();
+            ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
+            m.addAttribute("userWeAreVisiting", userWeAreVisiting);
+            m.addAttribute("loggedInUser", loggedInUser);
         }
         return "postDetails";
     }
@@ -77,5 +76,15 @@ public class ApplicationUserController {
         }
         m.addAttribute("loggedInUser", applicationUserRepository.findByUsername(p.getName()));
         return "feed";
+    }
+
+    @PostMapping("/follow/{id}")
+    public RedirectView followFRequest(@PathVariable long id, Principal p){
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
+        ApplicationUser followUser = applicationUserRepository.findById(id).get();
+        loggedInUser.haveMoreFollows(followUser);
+        applicationUserRepository.save(loggedInUser);
+
+        return new RedirectView("/users/" + id);
     }
 }

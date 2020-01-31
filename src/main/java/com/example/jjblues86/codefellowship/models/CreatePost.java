@@ -19,20 +19,14 @@ public class CreatePost {
 
 
     String color;
-    String name;
     String body;
-    String gender;
-    String hobby;
     String createdAt;
 
 
-    public CreatePost(ApplicationUser applicationUser, String color, String name, String body, String gender, String hobby,String createdAt) {
+    public CreatePost(ApplicationUser applicationUser, String color, String body) {
         this.applicationUser = applicationUser;
         this.color = color;
-        this.name = name;
         this.body = body;
-        this.gender = gender;
-        this.hobby = hobby;
         //https://www.javatpoint.com/java-simpledateformat
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -46,6 +40,7 @@ public class CreatePost {
     public long getId() {
         return Id;
     }
+
     public String getBody() {
         return body;
     }
@@ -62,13 +57,6 @@ public class CreatePost {
         return color;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public String getHobby() {
-        return hobby;
-    }
 
     public void haveMoreFollows(CreatePost following) {
 

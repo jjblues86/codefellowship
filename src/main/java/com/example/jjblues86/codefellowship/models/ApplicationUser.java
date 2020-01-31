@@ -19,21 +19,8 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
     List<CreatePost> posts;
 
-    public List<CreatePost> getPosts(){
-        return this.posts;
-    }
 
-    public Set<ApplicationUser> getUsersThatIFollow() {
-        return usersThatIFollow;
-    }
 
-    public void haveMoreFollows(ApplicationUser following){
-        this.usersThatIFollow.add(following);
-    }
-
-    public Set<ApplicationUser> getUsersThatFollowMe() {
-        return usersThatFollowMe;
-    }
 
     @ManyToMany
     @JoinTable(name="follow",
@@ -52,7 +39,6 @@ public class ApplicationUser implements UserDetails {
     String dob;
 
 
-    public ApplicationUser(){};
 
     public ApplicationUser(String username, String password, String firstName, String lastName, String bio, String dob){
         this.username = username;
@@ -61,6 +47,23 @@ public class ApplicationUser implements UserDetails {
         this.lastName = lastName;
         this.bio = bio;
         this.dob = dob;
+    }
+    public ApplicationUser(){};
+
+    public List<CreatePost> getPosts(){
+        return this.posts;
+    }
+
+    public Set<ApplicationUser> getUsersThatFollowMe() {
+        return usersThatFollowMe;
+    }
+
+    public Set<ApplicationUser> getUsersThatIFollow() {
+        return usersThatIFollow;
+    }
+
+    public void haveMoreFollows(ApplicationUser following){
+        this.usersThatIFollow.add(following);
     }
 
     public long getId() {
