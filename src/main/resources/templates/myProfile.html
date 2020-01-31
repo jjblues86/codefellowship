@@ -16,6 +16,7 @@
                 <a href="/myProfile">My Profile</a>
                 <a href="/users/"> All Users</a>
                 <a href="/logout">Log Out</a>
+                <a href="/feed">Feed</a>
             </li>
         </ul>
     </nav>
@@ -32,23 +33,19 @@
     <p>[[${currentUser.username}]] [[${currentUser.firstName}]]</p>
 </div>
 
-<form method="post" th:action="'/follow/' + ${loggedInUser.id}">
-   <button>Follow</button>
-</form>
 
 <ul>
     <li th:each="post : ${loggedInUser.posts}" th:style="'background-color:' + ${post.color}">
-        <p> [[${post.color}]] [[${post.body}]] [[${post.gender}]] [[${post.hobby}]]</p>
+        <label>Created At:</label>
+        <p th:text="${post.createdAt}"></p>
+        <p th:text="${post.body}">Message: </p>
     </li>
 </ul>
-<form action="/postDetails" method="post">
+<form action="/myProfile" method="post">
 
     <input type="hidden" th:value="${userIdWeAreVisiting}" name="id">
     Color <input type="color" name="color"><br>
-    Name <input type="name" name="name"><br>
     Body <input type="text" name="body">
-    Gender <input type="text" name="gender">
-    Hobby <input type="text" name="hobby">
     <input type="submit">
 </form>
 

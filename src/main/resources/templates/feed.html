@@ -7,8 +7,22 @@
 
 </head>
 <body>
+<div class="nav">
+<nav>
+    <ul>
+        <li>
+            <a href="/">Home</a>
+            <a href="/login">Login</a>
+            <a href="/myProfile">My Profile</a>
+            <a href="/users/">All Users</a>
+            <a href="/logout">Log Out</a>
+        </li>
+    </ul>
+</nav>
+</div>
 <h1>Feed</h1>
-<div th:each="feed : ${loggedInUser.following}"></div>
-
+<div th:each="feed : ${loggedInUser.posts}">
+    <p>[[${feed.username}]]</p>
+</div>
 </body>
 </html>

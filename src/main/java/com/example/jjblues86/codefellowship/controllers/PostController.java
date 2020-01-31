@@ -6,8 +6,11 @@ import com.example.jjblues86.codefellowship.models.CreatePost;
 import com.example.jjblues86.codefellowship.models.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.security.Principal;
 
 @Controller
 public class PostController {
@@ -18,16 +21,16 @@ public class PostController {
     @Autowired
     PostRepository postRepository;
 
-    @PostMapping("/postDetails")
-        public RedirectView createUserProfile(long id, String color, String name, String body, String gender, String hobby, String createdAt){
-        ApplicationUser userProfile = applicationUserRepository.findById(id).get();
+    @PostMapping("/myProfile")
+        public RedirectView createUserProfile(String color, String body, Principal p, Model m){
+        ApplicationUser userProfile = applicationUserRepository.findByUsername(p.getName());
 
-        CreatePost createProfile = new CreatePost(userProfile, color, name, body, gender, hobby, createdAt);
-        postRepository.save(createProfile);
-        return new RedirectView("/users/" + id);
+        CreatePost post = new CreatePost(userProfile, color, body);
+        postRepository.save(post);
+        return new RedirectView("myProfile");
         }
 
-    @PostMapping("post/follow")
+    @PostMapping("post")
         public RedirectView canFollowEachOther(long id, long followerId, long followingId){
         CreatePost follower = postRepository.findById(followerId).get();
         CreatePost following = postRepository.findById(followingId).get();

@@ -15,15 +15,15 @@
                 <a href="/myProfile">My Profile</a>
                 <a href="/users/">All Users</a>
                 <a href="/logout">Log Out</a>
+                <a href="/feed">Feed</a>
             </li>
         </ul>
     </nav>
 </div>
 
 
-<!--<div th:each="currentuser : ${allUsers}"></div>-->
-<div th:each="currentUser : ${allUsers}">
-    <p>[[${currentUser.username}]]</p>
+<div th:each="user : ${allUsers}">
+    <a th:href="'/users/'+${user.id}">[[${user.username}]]</a>
 </div>
 
 </body>
